@@ -1,16 +1,14 @@
 package com.kampherbeek.art.fe.calc;
 
 
+import com.kampherbeek.art.util.TextProvider;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
-import static java.util.Locale.setDefault;
 
 @Component
 public class CalcController {
@@ -18,14 +16,14 @@ public class CalcController {
     private JFrame calcFrame;
     private JPanel inputPanel;
     private JPanel resultPanel;
-    private ResourceBundle rb;
 
+
+    private final TextProvider textProvider;
+    private final CalcInputPanelCreator inputPanelCreator;
     @Autowired
-    private CalcInputPanelCreator inputPanelCreator;
-    public CalcController(@NonNull CalcInputPanelCreator inputPanelCreator) {
+    public CalcController(@NonNull CalcInputPanelCreator inputPanelCreator, @NonNull TextProvider textProvider) {
         this.inputPanelCreator = inputPanelCreator;
-        Locale.setDefault(new Locale("en", "US"));  // TODO use config for Locale
-        rb = ResourceBundle.getBundle("art_common");
+        this.textProvider = textProvider;
     }
 
     public void show() {
@@ -44,7 +42,7 @@ public class CalcController {
             });
         }
 
-        calcFrame = new JFrame(rb.getString("CALC.TITLE"));
+        calcFrame = new JFrame(textProvider.getText("CALC.TITLE"));
         layoutComponents();
         calcFrame.setSize(600,500);
         calcFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

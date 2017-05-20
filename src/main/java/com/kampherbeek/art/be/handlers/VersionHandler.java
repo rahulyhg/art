@@ -1,5 +1,6 @@
-package com.kampherbeek.art.be;
+package com.kampherbeek.art.be.handlers;
 
+import com.kampherbeek.art.be.solvers.VersionSolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,8 +13,8 @@ import lombok.Getter;
 @Component
 public class VersionHandler {
 	
-	private 
-	VersionSolver solver;
+	private final
+    VersionSolver solver;
 	@Getter
 	private String version;
 

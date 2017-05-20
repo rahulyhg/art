@@ -1,7 +1,9 @@
 package com.kampherbeek.art.fe.main;
 
 
+import com.kampherbeek.art.util.TextProvider;
 import lombok.NonNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
@@ -21,23 +23,18 @@ public class MainNavPanelCreator {
     private JButton calculatorsBtn;
     private JButton exitBtn;
     private MainNavigationListener listener;
-    private ResourceBundle rb;
+    private final TextProvider textProvider;
 
-    public MainNavPanelCreator() {
-        Locale.setDefault(new Locale("en", "US"));  // TODO use config for Locale
-        rb = ResourceBundle.getBundle("art_common");
+    @Autowired
+    public MainNavPanelCreator(@NonNull TextProvider textProvider) {
+        this.textProvider = textProvider;
+        defineComponents();
     }
 
     // TODO check possibilities to autowire listener, is currently an interface
     public JPanel constructPanel(@NonNull MainNavigationListener listener) {
         this.listener = listener;
         navPanel = new JPanel();
-        horoscopeBtn = new JButton(rb.getString("GENERAL.BTN.HOROSCOPES"));
-        cyclesBtn = new JButton(rb.getString("GENERAL.BTN.CYCLES"));
-        statisticsBtn = new JButton(rb.getString("GENERAL.BTN.STATISTICS"));
-        calculatorsBtn = new JButton(rb.getString("GENERAL.BTN.CALCULATORS"));
-        exitBtn = new JButton(rb.getString("GENERAL.BTN.EXIT"));
-
         layoutComponents();
         defineActions();
         return navPanel;
@@ -62,6 +59,15 @@ public class MainNavPanelCreator {
                 }
             }
         };
+    }
+
+
+    private void defineComponents() {
+        horoscopeBtn = new JButton(textProvider.getText("GENERAL.BTN.HOROSCOPES"));
+        cyclesBtn = new JButton(textProvider.getText("GENERAL.BTN.CYCLES"));
+        statisticsBtn = new JButton(textProvider.getText("GENERAL.BTN.STATISTICS"));
+        calculatorsBtn = new JButton(textProvider.getText("GENERAL.BTN.CALCULATORS"));
+        exitBtn = new JButton(textProvider.getText("GENERAL.BTN.EXIT"));
     }
 
 

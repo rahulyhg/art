@@ -1,7 +1,9 @@
 package com.kampherbeek.art.fe.calc;
 
 
+import com.kampherbeek.art.util.TextProvider;
 import lombok.NonNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
@@ -15,21 +17,27 @@ public class CalcResultPanelCreator {
     private JPanel resultPanel;
     private JLabel panelTitleLabel;
     private JLabel resultLabel;
-    private ResourceBundle rb;
+    private final TextProvider textProvider;
 
 
-    public CalcResultPanelCreator() {
-        Locale.setDefault(new Locale("en", "US"));  // TODO use config for Locale
-        rb = ResourceBundle.getBundle("art_common");
+    @Autowired
+    public CalcResultPanelCreator(@NonNull TextProvider textProvider) {
+        this.textProvider = textProvider;
+        defineComponents();
     }
 
     public JPanel constructPanel() {
         resultPanel = new JPanel();
-        panelTitleLabel = new JLabel(rb.getString("CALC.RESULT"));
-        resultLabel = new JLabel("....");
         layoutComponents();
         return resultPanel;
     }
+
+
+    private void defineComponents() {
+        panelTitleLabel = new JLabel(textProvider.getText("CALC.RESULT"));
+        resultLabel = new JLabel("....");
+    }
+
 
     public void layoutComponents() {
         resultPanel.setLayout(new GridBagLayout());

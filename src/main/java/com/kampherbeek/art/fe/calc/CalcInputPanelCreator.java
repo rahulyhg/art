@@ -1,13 +1,13 @@
 package com.kampherbeek.art.fe.calc;
 
 
+import com.kampherbeek.art.util.TextProvider;
 import lombok.NonNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 @Component
 public class CalcInputPanelCreator {
@@ -20,23 +20,27 @@ public class CalcInputPanelCreator {
     private JLabel calendarLabel;
     private JLabel longitudeLabel;
     private JLabel latitudeLabel;
+    private JRadioButton gregorianRadio;
+    private JRadioButton julianRadio;
+    private ButtonGroup calendarGroup;
     private JTextField dateField;
-    private ResourceBundle rb;
+    private JTextField timeField;
+    private JTextField latitudeField;
+    private JTextField longitudeField;
+    private final TextProvider textProvider;
 
-
-    public CalcInputPanelCreator() {
-        Locale.setDefault(new Locale("en", "US"));  // TODO use config for Locale
-        rb = ResourceBundle.getBundle("art_common");
+    @Autowired
+    public CalcInputPanelCreator(@NonNull TextProvider textProvider) {
+        this.textProvider = textProvider;
+        defineComponents();
     }
 
 
     public JPanel constructPanel(@NonNull CalcInputListener listener) {
             this.listener = listener;
             inputPanel = new JPanel();
-            defineTexts();
-            dateField = new JTextField(10);
+            defineComponents();
 
-            calcButton = new JButton(rb.getString("CALC.BTN.CALC "));
             layoutComponents();
 //            defineActions();
             return inputPanel;
@@ -63,12 +67,23 @@ public class CalcInputPanelCreator {
 //        };
 //    }
 
-    private void defineTexts() {
-        dateLabel = new JLabel(rb.getString("GENERAL.LBL.DATE"));
-        timeLabel = new JLabel(rb.getString("GENERAL.LBL.TIME"));
-        calendarLabel = new JLabel(rb.getString("GENERAL.LBL.CALENDAR"));
-        longitudeLabel = new JLabel(rb.getString("GENERAL.LBL.LONGITUDE"));
-        latitudeLabel = new JLabel(rb.getString("GENERAL.LBL.LATITUDE"));
+    private void defineComponents() {
+        dateLabel = new JLabel(textProvider.getText("GENERAL.LBL.DATE"));
+        timeLabel = new JLabel(textProvider.getText("GENERAL.LBL.TIME"));
+        calendarLabel = new JLabel(textProvider.getText("GENERAL.LBL.CALENDAR"));
+        longitudeLabel = new JLabel(textProvider.getText("GENERAL.LBL.LONGITUDE"));
+        latitudeLabel = new JLabel(textProvider.getText("GENERAL.LBL.LATITUDE"));
+        dateField = new JTextField(10);
+        timeField = new JTextField(10);
+        latitudeField = new JTextField(10);
+        longitudeField = new JTextField(10);
+        gregorianRadio = new JRadioButton(textProvider.getText("GENERAL.RADIO.GREGORIAN"));
+        julianRadio = new JRadioButton(textProvider.getText("GENERAL.RADIO.JULIAN"));
+        gregorianRadio.setSelected(true);
+        calendarGroup = new ButtonGroup();
+        calendarGroup.add(julianRadio);
+        calendarGroup.add(gregorianRadio);
+        calcButton = new JButton(textProvider.getText("CALC.BTN.CALC"));
     }
 
 
@@ -77,7 +92,7 @@ public class CalcInputPanelCreator {
         GridBagConstraints gc = new GridBagConstraints();
         gc.gridy = 0;
 
-        // first row
+        // date
         gc.gridx = 0;
         gc.weightx = 1;
         gc.weighty = 0.1;
@@ -92,7 +107,83 @@ public class CalcInputPanelCreator {
         inputPanel.add(dateField, gc);
 
 
+        // time
+        gc.gridx = 0;
         gc.gridy++;
+        gc.weightx = 1;
+        gc.weighty = 0.1;
+        gc.fill = GridBagConstraints.NONE;
+        gc.anchor = GridBagConstraints.LINE_END;
+        gc.insets = new Insets(0, 0, 0, 5);
+        inputPanel.add(timeLabel, gc);
+
+        gc.gridx = 1;
+        gc.insets = new Insets(0, 0, 0, 0);
+        gc.anchor = GridBagConstraints.LINE_START;
+        inputPanel.add(timeField, gc);
+
+        // calendar
+        gc.gridx = 0;
+        gc.gridy++;
+        gc.weightx = 1;
+        gc.weighty = 0.02;
+        gc.fill = GridBagConstraints.NONE;
+        gc.anchor = GridBagConstraints.LINE_END;
+        gc.insets = new Insets(0, 0, 0, 5);
+        inputPanel.add(calendarLabel, gc);
+
+        gc.gridx = 1;
+        gc.insets = new Insets(0, 0, 0, 0);
+        gc.anchor = GridBagConstraints.LINE_START;
+        inputPanel.add(gregorianRadio, gc);
+
+        // calendar 2nd line
+        gc.gridy++;
+        gc.weightx = 1;
+        gc.weighty = 0.02;
+        gc.gridx = 1;
+        gc.insets = new Insets(0, 0, 0, 0);
+        gc.anchor = GridBagConstraints.LINE_START;
+        inputPanel.add(julianRadio, gc);
+
+        // latitude
+        gc.gridx = 0;
+        gc.gridy++;
+        gc.weightx = 1;
+        gc.weighty = 0.1;
+        gc.fill = GridBagConstraints.NONE;
+        gc.anchor = GridBagConstraints.LINE_END;
+        gc.insets = new Insets(0, 0, 0, 5);
+        inputPanel.add(latitudeLabel, gc);
+
+        gc.gridx = 1;
+        gc.insets = new Insets(0, 0, 0, 0);
+        gc.anchor = GridBagConstraints.LINE_START;
+        inputPanel.add(latitudeField, gc);
+
+        // longitude
+        gc.gridx = 0;
+        gc.gridy++;
+        gc.weightx = 1;
+        gc.weighty = 0.1;
+        gc.fill = GridBagConstraints.NONE;
+        gc.anchor = GridBagConstraints.LINE_END;
+        gc.insets = new Insets(0, 0, 0, 5);
+        inputPanel.add(longitudeLabel, gc);
+
+        gc.gridx = 1;
+        gc.insets = new Insets(0, 0, 0, 0);
+        gc.anchor = GridBagConstraints.LINE_START;
+        inputPanel.add(longitudeField, gc);
+
+
+
+
+
+
+        gc.gridy++;
+        gc.weightx = 1;
+        gc.weighty = 1;
         gc.anchor = GridBagConstraints.LINE_END;
         gc.insets = new Insets(0, 5, 0, 5);
         inputPanel.add(calcButton, gc);

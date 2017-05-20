@@ -16,12 +16,10 @@ public class MainController {
     private JPanel navPanel;
     private JPanel infoPanel;
 
+    private final MainInfoPanelCreator infoPanelCreator;
+    private final MainNavPanelCreator navPanelCreator;
+    private final CalcController calcController;
     @Autowired
-    private MainInfoPanelCreator infoPanelCreator;
-    @Autowired
-    private MainNavPanelCreator navPanelCreator;
-    @Autowired
-    private CalcController calcController;
     public MainController(@NonNull MainInfoPanelCreator infoPanelCreator,
                           @NonNull MainNavPanelCreator navPanelCreator,
                           @NonNull CalcController calcController) {

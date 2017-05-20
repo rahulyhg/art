@@ -1,4 +1,4 @@
-package com.kampherbeek.art.be;
+package com.kampherbeek.art.be.solvers;
 
 
 import org.springframework.beans.factory.annotation.Value;
