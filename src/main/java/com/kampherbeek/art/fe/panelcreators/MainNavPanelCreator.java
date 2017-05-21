@@ -1,6 +1,14 @@
-package com.kampherbeek.art.fe.main;
+/***********************************************************************************************************************
+ *  Copyright (C) 2017 Jan Kampherbeek (http://radixpro.org).
+ *  ART is open source.
+ *  Please check the file 'Copyright for ART' in the folder 'copyright' at the root of this distribution.
+ **********************************************************************************************************************/
+
+package com.kampherbeek.art.fe.panelcreators;
 
 
+import com.kampherbeek.art.fe.main.MainNavigationEvent;
+import com.kampherbeek.art.fe.main.MainNavigationListener;
 import com.kampherbeek.art.util.TextProvider;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +18,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 @Component
 public class MainNavPanelCreator {
 
     private JPanel navPanel;
-    private JButton horoscopeBtn;
+    private JButton chartsBtn;
     private JButton cyclesBtn;
     private JButton statisticsBtn;
     private JButton calculatorsBtn;
@@ -42,7 +48,7 @@ public class MainNavPanelCreator {
 
 
     private void defineActions() {
-        horoscopeBtn.addActionListener(createActionListener("HOROSCOPES"));
+        chartsBtn.addActionListener(createActionListener("HOROSCOPES"));
         cyclesBtn.addActionListener(createActionListener("CYCLES"));
         statisticsBtn.addActionListener(createActionListener("STATISTICS"));
         calculatorsBtn.addActionListener(createActionListener("CALCULATORS"));
@@ -63,7 +69,7 @@ public class MainNavPanelCreator {
 
 
     private void defineComponents() {
-        horoscopeBtn = new JButton(textProvider.getText("GENERAL.BTN.HOROSCOPES"));
+        chartsBtn = new JButton(textProvider.getText("GENERAL.BTN.HOROSCOPES"));
         cyclesBtn = new JButton(textProvider.getText("GENERAL.BTN.CYCLES"));
         statisticsBtn = new JButton(textProvider.getText("GENERAL.BTN.STATISTICS"));
         calculatorsBtn = new JButton(textProvider.getText("GENERAL.BTN.CALCULATORS"));
@@ -81,7 +87,7 @@ public class MainNavPanelCreator {
         gc.fill = GridBagConstraints.HORIZONTAL;
         gc.anchor = GridBagConstraints.LINE_END;
         gc.insets = new Insets(0, 5, 0, 5);
-        navPanel.add(horoscopeBtn, gc);
+        navPanel.add(chartsBtn, gc);
         gc.gridy++;
         navPanel.add(cyclesBtn, gc);
         gc.gridy++;

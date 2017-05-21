@@ -1,3 +1,9 @@
+/***********************************************************************************************************************
+ *  Copyright (C) 2017 Jan Kampherbeek (http://radixpro.org).
+ *  ART is open source.
+ *  Please check the file 'Copyright for ART' in the folder 'copyright' at the root of this distribution.
+ **********************************************************************************************************************/
+
 package com.kampherbeek.art.util;
 
 
@@ -38,18 +44,12 @@ public enum MinMaxValues {
     private int valueInt;
     @Getter
     private double valueDbl;
-    @Getter
-    private String valueStr;
 
     MinMaxValues(@NonNull Object value) {
         if (value instanceof Integer) {
             this.valueInt = (int) value;
         } else if (value instanceof  Double) {
             this.valueDbl = (double) value;
-        }  else if (value instanceof String) {
-            this.valueStr = (String) value;
-        } else {
-            throw new RuntimeException();   // TODO make explicit exception
         }
     }
 

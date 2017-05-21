@@ -6,8 +6,25 @@
 
 package com.kampherbeek.art.domain.requests;
 
+import org.junit.Before;
+import org.junit.Test;
 
-public interface Request {
+import static org.junit.Assert.*;
 
-    boolean isValid();
+
+public class GenericRequestNoParTest {
+
+    private GenericRequestNoPar request;
+
+    @Before
+    public void setUp() throws Exception {
+        request = new GenericRequestNoPar();
+    }
+
+    @Test
+    public void isValid() throws Exception {
+        // as requst has no parameters, it should always be valid.
+        assertTrue(request.isValid());
+    }
+
 }

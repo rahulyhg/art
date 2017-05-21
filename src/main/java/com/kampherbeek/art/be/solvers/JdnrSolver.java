@@ -1,3 +1,9 @@
+/***********************************************************************************************************************
+ *  Copyright (C) 2017 Jan Kampherbeek (http://radixpro.org).
+ *  ART is open source.
+ *  Please check the file 'Copyright for ART' in the folder 'copyright' at the root of this distribution.
+ **********************************************************************************************************************/
+
 package com.kampherbeek.art.be.solvers;
 
 
@@ -21,13 +27,9 @@ public class JdnrSolver {
     }
 
     public double calcJdnr (@NonNull DateDto dateDto, @NonNull TimeDto timeDto) {
-        double ut = defineUtDecimalHour(timeDto);
+        double ut = calculations.decimalTimeFromHMS(timeDto.getHour(), timeDto.getMinute(), timeDto.getSecond());
         SweDate sweDate = new SweDate(dateDto.getYear(), dateDto.getMonth(), dateDto.getDay(), ut, dateDto.isGregorian());
         return sweDate.getJulDay();
-    }
-
-    private double defineUtDecimalHour(@NonNull TimeDto timeDto) {
-        return calculations.decimalTimeFromHMS(timeDto.getHour(), timeDto.getMinute(), timeDto.getSecond());
     }
 
 }
