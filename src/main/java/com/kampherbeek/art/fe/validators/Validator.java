@@ -4,10 +4,13 @@
   Please check the file 'Copyright for ART' in the folder 'copyright' at the root of this distribution.
  */
 
-package com.kampherbeek.art.domain.requests;
+package com.kampherbeek.art.fe.validators;
 
 
-public interface Request {
+import lombok.NonNull;
 
-    boolean isValid();
+public interface Validator {
+
+    boolean validate(@NonNull Object x);
+
 }

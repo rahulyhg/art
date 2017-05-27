@@ -4,10 +4,10 @@
  *  Please check the file 'Copyright for ART' in the folder 'copyright' at the root of this distribution.
  **********************************************************************************************************************/
 
-package com.kampherbeek.art.domain.converters;
+package com.kampherbeek.art.fe.converters;
 
-import com.kampherbeek.art.domain.dto.DateDto;
-import com.kampherbeek.art.domain.validators.DateValidator;
+import com.kampherbeek.art.domain.dto.TimeDto;
+import com.kampherbeek.art.fe.validators.TimeValidator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,17 +20,15 @@ import org.mockito.runners.MockitoJUnitRunner;
 import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DateConverterTest {
+public class TimeConverterTest {
 
-    private String input = "2017-05-19";
-    private String invalidInput = "x017-05-19";
-    private boolean gregorian = true;
-
+    private String input = "19:25:33";
+    private String invalidInput = "x9:25:33";
 
     @Mock
-    private DateValidator validatorMock = mock(DateValidator.class);
+    private TimeValidator validatorMock = mock(TimeValidator.class);
     @InjectMocks
-    private DateConverter converter;
+    private TimeConverter converter;
 
     @Before
     public void setUp() throws Exception {
@@ -38,20 +36,20 @@ public class DateConverterTest {
     }
 
     @Test
-    public void convertDateTime() throws Exception {
-        DateDto result = converter.convertDate(input, gregorian);
-        assertEquals(19, result.getDay());
-        assertEquals(5, result.getMonth());
-        assertEquals(19, result.getDay());
-        assertTrue(result.isGregorian());
+    public void convertTime() throws Exception {
+        TimeDto result = converter.convertTime(input);
+        assertEquals(19, result.getHour());
+        assertEquals(25, result.getMinute());
+        assertEquals(33, result.getSecond());
         assertTrue(result.isValid());
     }
 
     @Test
     public void convertDateTimeInvalidInput() throws Exception {
-        DateDto result = converter.convertDate(invalidInput, gregorian);
+        TimeDto result = converter.convertTime(invalidInput);
         assertFalse(result.isValid());
     }
 
 
 }
+

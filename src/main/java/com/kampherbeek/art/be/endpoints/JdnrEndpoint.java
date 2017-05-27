@@ -1,8 +1,8 @@
-/***********************************************************************************************************************
- *  Copyright (C) 2017 Jan Kampherbeek (http://radixpro.org).
- *  ART is open source.
- *  Please check the file 'Copyright for ART' in the folder 'copyright' at the root of this distribution.
- **********************************************************************************************************************/
+/*
+  Copyright (C) 2017 Jan Kampherbeek (http://radixpro.org).
+  ART is open source.
+  Please check the file 'Copyright for ART' in the folder 'copyright' at the root of this distribution.
+ */
 
 package com.kampherbeek.art.be.endpoints;
 
@@ -14,7 +14,9 @@ import com.kampherbeek.art.domain.responses.JdnrResponse;
 import com.kampherbeek.art.domain.responses.Response;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class JdnrEndpoint {
 
     private final JdnrHandler handler;
@@ -24,7 +26,7 @@ public class JdnrEndpoint {
         this.handler = handler;
     }
 
-    public Response handleRequest(Request request) {
+    public Response handleRequest(@NonNull Request request) {
         JdnrResponse response = new JdnrResponse();
         if (request instanceof JdnrRequest) {
             response.setJdnr(handler.getJdnr((JdnrRequest)request));

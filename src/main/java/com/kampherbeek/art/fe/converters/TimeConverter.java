@@ -1,13 +1,13 @@
-/***********************************************************************************************************************
- *  Copyright (C) 2017 Jan Kampherbeek (http://radixpro.org).
- *  ART is open source.
- *  Please check the file 'Copyright for ART' in the folder 'copyright' at the root of this distribution.
- **********************************************************************************************************************/
+/*
+  Copyright (C) 2017 Jan Kampherbeek (http://radixpro.org).
+  ART is open source.
+  Please check the file 'Copyright for ART' in the folder 'copyright' at the root of this distribution.
+ */
 
-package com.kampherbeek.art.domain.converters;
+package com.kampherbeek.art.fe.converters;
 
 import com.kampherbeek.art.domain.dto.TimeDto;
-import com.kampherbeek.art.domain.validators.TimeValidator;
+import com.kampherbeek.art.fe.validators.TimeValidator;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

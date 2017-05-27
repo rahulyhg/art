@@ -1,10 +1,10 @@
-/***********************************************************************************************************************
- *  Copyright (C) 2017 Jan Kampherbeek (http://radixpro.org).
- *  ART is open source.
- *  Please check the file 'Copyright for ART' in the folder 'copyright' at the root of this distribution.
- **********************************************************************************************************************/
+/*
+  Copyright (C) 2017 Jan Kampherbeek (http://radixpro.org).
+  ART is open source.
+  Please check the file 'Copyright for ART' in the folder 'copyright' at the root of this distribution.
+ */
 
-package com.kampherbeek.art.fe.panelcreators;
+package com.kampherbeek.art.fe.panels;
 
 
 import com.kampherbeek.art.fe.main.MainNavigationEvent;
@@ -59,7 +59,7 @@ public class MainNavPanelCreator {
     private ActionListener createActionListener(@NonNull final String btnType) {
         return new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                MainNavigationEvent event = new MainNavigationEvent(navPanel, btnType);
+                MainNavigationEvent event = new MainNavigationEvent(navPanel, btnType, null);
                 if (listener != null) {
                     listener.navigationEventOccurred(event);
                 }
