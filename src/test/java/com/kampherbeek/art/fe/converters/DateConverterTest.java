@@ -50,6 +50,16 @@ public class DateConverterTest {
     }
 
     @Test
+    public void convertDateJulian() throws Exception {
+        DateDto result = converter.convertDate(input, false);
+        assertEquals(2017, result.getYear());
+        assertEquals(5, result.getMonth());
+        assertEquals(19, result.getDay());
+        assertFalse(result.isGregorian());
+        assertTrue(result.isValid());
+    }
+
+    @Test
     public void convertDateInvalidInput() throws Exception {
         DateDto result = converter.convertDate(invalidInput, gregorian);
         assertFalse(result.isValid());

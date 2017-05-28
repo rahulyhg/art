@@ -21,6 +21,7 @@ public class CalcInputEvent extends EventObject {
     private String timeText;
     private String latitudeText;
     private String longitudeText;
+    private boolean gregorian;
     private CalcResultPanel resultPanel;
 
     /**
@@ -30,11 +31,12 @@ public class CalcInputEvent extends EventObject {
      * @throws IllegalArgumentException if source is null.
      */
     public CalcInputEvent(@NonNull Object source,
-                          @NonNull String dateText, @NonNull String timeText,
+                          @NonNull String dateText, @NonNull boolean gregorian, @NonNull String timeText,
                           @NonNull String latitudeText, @NonNull String longitudeText,
                           @NonNull CalcResultPanel resultPanel) {
         super(source);
         this.dateText = dateText;
+        this.gregorian = gregorian;
         this.timeText = timeText;
         this.latitudeText = latitudeText;
         this.longitudeText = longitudeText;

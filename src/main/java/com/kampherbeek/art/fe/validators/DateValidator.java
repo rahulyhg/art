@@ -33,7 +33,7 @@ public class DateValidator implements Validator{
         double ut = 0.0;
         SweDate sweDate1 = new SweDate(dto.getYear(), dto.getMonth(), dto.getDay(), ut, dto.isGregorian());
         double jdnr = sweDate1.getJulDay();
-        SweDate sweDate2 = new SweDate(jdnr);
+        SweDate sweDate2 = new SweDate(jdnr, dto.isGregorian());
         return (sweDate1.getYear() == sweDate2.getYear() &&
                 sweDate1.getMonth() == sweDate2.getMonth() &&
                 sweDate1.getDay() == sweDate2.getDay());

@@ -15,6 +15,7 @@ import lombok.NonNull;
  */
 public enum TextConstants {
 
+    COLON(":"),
     DIVISON("-"),
     EMPTY_STRING(""),
     NEW_LINE("\n"),

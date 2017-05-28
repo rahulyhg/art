@@ -87,8 +87,9 @@ public class CalcInputPanel extends JPanel {
                 String timeText = timeField.getText();
                 String latitudeText = latitudeField.getText();
                 String longitudeText = longitudeField.getText();
-                CalcInputEvent event = new CalcInputEvent(this, dateText, timeText, latitudeText, longitudeText,
-                        controller.getResultPanel());
+                boolean gregorian = gregorianRadio.isSelected();
+                CalcInputEvent event = new CalcInputEvent(this, dateText, gregorian, timeText,
+                        latitudeText, longitudeText, controller.getResultPanel());
                 if (listener != null) {
                     listener.calcInputEventOccurred(event);
                 }

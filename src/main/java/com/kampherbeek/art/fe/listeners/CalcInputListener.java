@@ -44,21 +44,29 @@ public class CalcInputListener {
     }
 
     private void handleEvent(@NonNull CalcInputEvent event) {
-        DateDto dateDto = dateConverter.convertDate(event.getDateText(), true);
+        DateDto dateDto = dateConverter.convertDate(event.getDateText(), event.isGregorian());
         TimeDto timeDto = timeConverter.convertTime(event.getTimeText());
+        StringBuilder result = new StringBuilder("Julian Day Number for ");
+        result.append(event.getDateText());
+        result.append(TextConstants.SPACE.getText());
+        result.append(event.isGregorian()?"Gregorian":"Julian");
+        result.append(event.getTimeText());
+        result.append(TextConstants.COLON.getText());
+        result.append(TextConstants.SPACE.getText());
         if (!dateDto.isValid()) {
-            System.out.println("Error in date");
+            result.append("Error in date. ");
         }
         if (!timeDto.isValid()) {
-            System.out.println("Error in time");
+            result.append("Error in time. ");
         }
         if (dateDto.isValid() && timeDto.isValid()) {
             JdnrRequest request = new JdnrRequest();
             request.setDateDto(dateDto);
             request.setTimeDto(timeDto);
             JdnrResponse response = (JdnrResponse) jdnrEndpoint.handleRequest(request);
-            CalcResultPanel resultPanel = event.getResultPanel();
-            resultPanel.appendText(Double.toString(response.getJdnr()) + TextConstants.NEW_LINE.getText());
+            result.append(Double.toString(response.getJdnr()));
         }
+        CalcResultPanel resultPanel = event.getResultPanel();
+        resultPanel.appendText(result + TextConstants.NEW_LINE.getText());
     }
 }
