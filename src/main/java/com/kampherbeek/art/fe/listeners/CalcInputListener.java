@@ -12,9 +12,11 @@ import com.kampherbeek.art.domain.dto.DateDto;
 import com.kampherbeek.art.domain.dto.TimeDto;
 import com.kampherbeek.art.domain.requests.JdnrRequest;
 import com.kampherbeek.art.domain.responses.JdnrResponse;
+import com.kampherbeek.art.fe.controllers.CalcController;
 import com.kampherbeek.art.fe.converters.DateConverter;
 import com.kampherbeek.art.fe.converters.TimeConverter;
 import com.kampherbeek.art.fe.events.CalcInputEvent;
+import com.kampherbeek.art.fe.helpers.CalcResultHelper;
 import com.kampherbeek.art.fe.panels.CalcResultPanel;
 import com.kampherbeek.art.util.TextConstants;
 import lombok.NonNull;
@@ -28,14 +30,17 @@ public class CalcInputListener {
     private final DateConverter dateConverter;
     private final TimeConverter timeConverter;
     private final JdnrEndpoint jdnrEndpoint;
+    private final CalcResultHelper calcResultHelper;
 
     @Autowired
     public CalcInputListener(@NonNull DateConverter dateConverter,
                              @NonNull TimeConverter timeConverter,
-                             @NonNull JdnrEndpoint jdnrEndpoint) {
+                             @NonNull JdnrEndpoint jdnrEndpoint,
+                             @NonNull CalcResultHelper calcResultHelper) {
         this.dateConverter = dateConverter;
         this.timeConverter = timeConverter;
         this.jdnrEndpoint = jdnrEndpoint;
+        this.calcResultHelper = calcResultHelper;
     }
 
 
@@ -46,27 +51,22 @@ public class CalcInputListener {
     private void handleEvent(@NonNull CalcInputEvent event) {
         DateDto dateDto = dateConverter.convertDate(event.getDateText(), event.isGregorian());
         TimeDto timeDto = timeConverter.convertTime(event.getTimeText());
-        StringBuilder result = new StringBuilder("Julian Day Number for ");
-        result.append(event.getDateText());
-        result.append(TextConstants.SPACE.getText());
-        result.append(event.isGregorian()?"Gregorian":"Julian");
-        result.append(event.getTimeText());
-        result.append(TextConstants.COLON.getText());
-        result.append(TextConstants.SPACE.getText());
-        if (!dateDto.isValid()) {
-            result.append("Error in date. ");
-        }
-        if (!timeDto.isValid()) {
-            result.append("Error in time. ");
-        }
+        double jdnr = 0.0;
         if (dateDto.isValid() && timeDto.isValid()) {
             JdnrRequest request = new JdnrRequest();
             request.setDateDto(dateDto);
             request.setTimeDto(timeDto);
             JdnrResponse response = (JdnrResponse) jdnrEndpoint.handleRequest(request);
-            result.append(Double.toString(response.getJdnr()));
+            jdnr = response.getJdnr();
         }
-        CalcResultPanel resultPanel = event.getResultPanel();
-        resultPanel.appendText(result + TextConstants.NEW_LINE.getText());
+        String result = calcResultHelper.constructJdnrResult(event, dateDto, timeDto, jdnr);
+        CalcController controller = event.getController();
+        controller.addResult(result + TextConstants.NEW_LINE.getText());
     }
+
+
+
+
+
+
 }

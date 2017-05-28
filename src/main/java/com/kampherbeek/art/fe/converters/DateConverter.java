@@ -30,7 +30,7 @@ public class DateConverter {
 
     private DateDto convertIt(@NonNull final String input, boolean gregorian) {
         DateDto dto = new DateDto();
-        final String separator = "-";
+        final String separator = "/";
         // yyyy-mm-dd
         try {
             String[] splitted = input.split(separator);

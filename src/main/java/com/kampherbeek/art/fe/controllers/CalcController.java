@@ -42,7 +42,10 @@ public class CalcController {
 
     public void show() {
         constructFrame();
+    }
 
+    public void addResult(@NonNull String result) {
+        resultPanel.appendText(result);
     }
 
     private void constructFrame() {
@@ -51,7 +54,6 @@ public class CalcController {
         calcFrame.setSize(FrameConstants.DEFAULT_WIDTH.getSize(), FrameConstants.DEFAULT_HEIGHT.getSize());
         calcFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         calcFrame.setVisible(true);
-
     }
 
     private void layoutComponents() {

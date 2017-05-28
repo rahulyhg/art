@@ -22,10 +22,10 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class DateConverterTest {
 
-    private String input = "2017-05-19";
-    private String invalidInput = "x017-05-19";
-    private String leadingZeroInput = "2000-01-01";
-    private String noLeadingZeroInput = "2000-2-3";
+    private String input = "2017/05/19";
+    private String invalidInput = "x017/05/19";
+    private String leadingZeroInput = "2000/01/01";
+    private String noLeadingZeroInput = "2000/2/3";
     private boolean gregorian = true;
 
 

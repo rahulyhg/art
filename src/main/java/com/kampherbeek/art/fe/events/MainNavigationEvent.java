@@ -7,6 +7,7 @@
 package com.kampherbeek.art.fe.events;
 
 
+import com.kampherbeek.art.fe.controllers.MainController;
 import com.kampherbeek.art.fe.panels.MainNavPanel;
 import lombok.Getter;
 import lombok.NonNull;
@@ -19,7 +20,7 @@ public class MainNavigationEvent extends EventObject{
     @Getter
     private String navigationAction;
     @Getter
-    private MainNavPanel navPanel;
+    private MainController controller;
 
 
     /**
@@ -32,9 +33,10 @@ public class MainNavigationEvent extends EventObject{
         super(source);
     }
 
-    public MainNavigationEvent(@NonNull Object source, @NonNull String navigationAction, @NonNull MainNavPanel navPanel) {
+    public MainNavigationEvent(@NonNull Object source, @NonNull String navigationAction,
+                               @NonNull MainController controller) {
         super(source);
         this.navigationAction = navigationAction;
-        this.navPanel = navPanel;
+        this.controller = controller;
     }
 }

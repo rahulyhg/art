@@ -42,6 +42,12 @@ public class DateValidatorTest {
     }
 
     @Test
+    public void validateJulian() throws Exception {
+        when(dtoMock.isGregorian()).thenReturn(false);
+        assertTrue(validator.validate(dtoMock));
+    }
+
+    @Test
     public void validateYearBeforeRange() throws Exception {
         when(dtoMock.getYear()).thenReturn(yearBeforeRange);
         assertFalse(validator.validate(dtoMock));

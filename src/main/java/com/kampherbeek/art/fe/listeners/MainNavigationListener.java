@@ -18,8 +18,7 @@ public class MainNavigationListener {
     private MainController controller;
 
     public void navigationEventOccurred(@NonNull MainNavigationEvent event){
-        MainNavPanel navPanel = event.getNavPanel();
-        controller = navPanel.getController();
+        controller = event.getController();
         handleEvent(event);
     }
 

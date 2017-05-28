@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 
 /**
- * Starts Spring context and the main frame of Swing. 
+ * Starts Spring context and the main controller of Swing.
  */
 @ComponentScan(basePackages = "com.kampherbeek.art")
 @Component

@@ -35,7 +35,11 @@ public class TimeConverter {
             String[] splitted = input.split(separator);
             dto.setHour(Integer.parseInt(splitted[0]));
             dto.setMinute(Integer.parseInt(splitted[1]));
-            dto.setSecond(Integer.parseInt(splitted[2]));
+            if (splitted.length > 2) {              // input for seconds available
+                dto.setSecond(Integer.parseInt(splitted[2]));
+            } else {
+                dto.setSecond(0);
+            }
             dto.setValid(validator.validate(dto));
         } catch (NumberFormatException e) {
             dto.setValid(false);

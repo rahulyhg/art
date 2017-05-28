@@ -103,7 +103,7 @@ public class MainNavPanel extends JPanel {
     private ActionListener createActionListener(@NonNull final String btnType, @NonNull MainNavPanel navPanel) {
         return new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                MainNavigationEvent event = new MainNavigationEvent(this, btnType, navPanel);
+                MainNavigationEvent event = new MainNavigationEvent(this, btnType, controller);
                 if (listener != null) {
                     listener.navigationEventOccurred(event);
                 }

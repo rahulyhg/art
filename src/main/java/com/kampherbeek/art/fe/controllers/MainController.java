@@ -79,7 +79,8 @@ public class MainController {
     private String createTitle() {
         Request request = new GenericRequestNoPar();
         VersionResponse response = (VersionResponse)versionEndpoint.handleRequest(request);
-        return textProvider.getText("GENERAL.TITLE")
+        final String key = "GENERAL.TITLE";
+        return textProvider.getText(key)
                 + TextConstants.SPACE.getText() + TextConstants.DIVISON.getText() + TextConstants.SPACE.getText()
                 + response.getVersion();
     }

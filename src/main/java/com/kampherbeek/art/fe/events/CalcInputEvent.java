@@ -6,6 +6,7 @@
 
 package com.kampherbeek.art.fe.events;
 
+import com.kampherbeek.art.fe.controllers.CalcController;
 import com.kampherbeek.art.fe.panels.CalcResultPanel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,7 +23,7 @@ public class CalcInputEvent extends EventObject {
     private String latitudeText;
     private String longitudeText;
     private boolean gregorian;
-    private CalcResultPanel resultPanel;
+    private CalcController controller;
 
     /**
      * Constructs a prototypical Event.
@@ -33,13 +34,13 @@ public class CalcInputEvent extends EventObject {
     public CalcInputEvent(@NonNull Object source,
                           @NonNull String dateText, @NonNull boolean gregorian, @NonNull String timeText,
                           @NonNull String latitudeText, @NonNull String longitudeText,
-                          @NonNull CalcResultPanel resultPanel) {
+                          @NonNull CalcController controller) {
         super(source);
         this.dateText = dateText;
         this.gregorian = gregorian;
         this.timeText = timeText;
         this.latitudeText = latitudeText;
         this.longitudeText = longitudeText;
-        this.resultPanel = resultPanel;
+        this.controller = controller;
     }
 }
