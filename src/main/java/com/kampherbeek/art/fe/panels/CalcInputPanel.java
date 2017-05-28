@@ -9,6 +9,7 @@ package com.kampherbeek.art.fe.panels;
 import com.kampherbeek.art.fe.calc.CalcInputEvent;
 import com.kampherbeek.art.fe.calc.CalcInputListener;
 import com.kampherbeek.art.fe.constants.GcConstants;
+import com.kampherbeek.art.fe.constants.PanelConstants;
 import com.kampherbeek.art.fe.controllers.CalcController;
 import com.kampherbeek.art.util.TextProvider;
 import lombok.Getter;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +29,8 @@ public class CalcInputPanel extends JPanel {
 
     private final TextProvider textProvider;
     private final CalcInputListener listener;
-    @Setter @Getter
+    @Setter
+    @Getter
     private CalcController controller;
     private JButton calcButton;
     private JLabel dateLabel;
@@ -48,6 +51,7 @@ public class CalcInputPanel extends JPanel {
         this.textProvider = textProvider;
         this.listener = listener;
         defineComponents();
+        defineBorders();
         layoutComponents();
         defineActions();
     }
@@ -91,6 +95,17 @@ public class CalcInputPanel extends JPanel {
             }
         };
     }
+
+
+    private void defineBorders() {
+        String key = "CALC.TITLE.INPUTPANEL";
+        Border innerBorder = BorderFactory.createTitledBorder(textProvider.getText(key));
+        int size = PanelConstants.MEDIUM_BORDER_WIDTH.getSize();
+        Border outerBorder = BorderFactory.createEmptyBorder(size, size, size, size);
+        setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
+    }
+
+
 
     private void layoutComponents() {
         setLayout(new GridBagLayout());

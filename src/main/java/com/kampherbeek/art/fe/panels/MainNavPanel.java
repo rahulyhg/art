@@ -7,6 +7,7 @@
 package com.kampherbeek.art.fe.panels;
 
 import com.kampherbeek.art.fe.constants.GcConstants;
+import com.kampherbeek.art.fe.constants.PanelConstants;
 import com.kampherbeek.art.fe.controllers.MainController;
 import com.kampherbeek.art.fe.main.MainNavigationEvent;
 import com.kampherbeek.art.fe.main.MainNavigationListener;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,6 +45,7 @@ public class MainNavPanel extends JPanel {
         this.textProvider = textProvider;
         this.listener = listener;
         defineComponents();
+        defineBorders();
         layoutComponents();
         defineActions();
     }
@@ -55,6 +58,15 @@ public class MainNavPanel extends JPanel {
         calculatorsBtn = new JButton(textProvider.getText("GENERAL.BTN.CALCULATORS"));
         exitBtn = new JButton(textProvider.getText("GENERAL.BTN.EXIT"));
     }
+
+    private void defineBorders() {
+        String key = "MAIN.TITLE.NAVPANEL";
+        Border innerBorder = BorderFactory.createTitledBorder(textProvider.getText(key));
+        int size = PanelConstants.LARGE_BORDER_WIDTH.getSize();
+        Border outerBorder = BorderFactory.createEmptyBorder(size, size, size, size);
+        setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
+    }
+
 
     private void layoutComponents() {
         setLayout(new GridBagLayout());

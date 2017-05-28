@@ -6,27 +6,28 @@
 
 package com.kampherbeek.art.fe.panels;
 
+import com.kampherbeek.art.fe.constants.PanelConstants;
 import com.kampherbeek.art.util.TextProvider;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 @Component
 public class CalcResultPanel extends JPanel {
 
     private final TextProvider textProvider;
-    private JLabel panelTitleLabel;
     private JTextArea resultTextArea;
 
     @Autowired
     public CalcResultPanel(@NonNull TextProvider textProvider) {
         this.textProvider = textProvider;
         defineComponents();
+        defineBorders();
         setLayout(new BorderLayout());
-        add(panelTitleLabel, BorderLayout.NORTH);
         add(new JScrollPane(resultTextArea), BorderLayout.CENTER);
     }
 
@@ -35,8 +36,16 @@ public class CalcResultPanel extends JPanel {
     }
 
     private void defineComponents() {
-        panelTitleLabel = new JLabel(textProvider.getText("CALC.RESULT"));
+
         resultTextArea = new JTextArea();
+    }
+
+    private void defineBorders() {
+        String key = "CALC.TITLE.RESULTPANEL";
+        Border innerBorder = BorderFactory.createTitledBorder(textProvider.getText(key));
+        int size = PanelConstants.MEDIUM_BORDER_WIDTH.getSize();
+        Border outerBorder = BorderFactory.createEmptyBorder(size, size, size, size);
+        setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
     }
 
 }
