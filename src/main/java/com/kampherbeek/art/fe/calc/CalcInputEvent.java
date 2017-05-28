@@ -8,11 +8,12 @@ package com.kampherbeek.art.fe.calc;
 
 import com.kampherbeek.art.fe.panels.CalcResultPanel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 
-import javax.swing.*;
 import java.util.EventObject;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class CalcInputEvent extends EventObject {
 

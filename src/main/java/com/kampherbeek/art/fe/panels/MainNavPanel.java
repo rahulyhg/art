@@ -6,6 +6,7 @@
 
 package com.kampherbeek.art.fe.panels;
 
+import com.kampherbeek.art.fe.constants.GcConstants;
 import com.kampherbeek.art.fe.controllers.MainController;
 import com.kampherbeek.art.fe.main.MainNavigationEvent;
 import com.kampherbeek.art.fe.main.MainNavigationListener;
@@ -29,7 +30,7 @@ public class MainNavPanel extends JPanel {
     private JButton statisticsBtn;
     private JButton calculatorsBtn;
     private JButton exitBtn;
-    private MainNavigationListener listener;
+    private final MainNavigationListener listener;
     @Getter
     @Setter
     private MainController controller;
@@ -61,7 +62,7 @@ public class MainNavPanel extends JPanel {
         gc.gridy = 0;
         gc.gridx = 0;
         gc.weightx = 1;
-        gc.weighty = 0.1;
+        gc.weighty = GcConstants.S.getValue();
         gc.fill = GridBagConstraints.HORIZONTAL;
         gc.anchor = GridBagConstraints.LINE_END;
         gc.insets = new Insets(0, 5, 0, 5);
@@ -73,7 +74,7 @@ public class MainNavPanel extends JPanel {
         gc.gridy++;
         add(calculatorsBtn, gc);
         gc.gridy++;
-        gc.weighty = 1.0;
+        gc.weighty = GcConstants.M.getValue();
         add(exitBtn, gc);
     }
 

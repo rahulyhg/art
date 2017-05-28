@@ -7,6 +7,7 @@
 package com.kampherbeek.art.fe.controllers;
 
 
+import com.kampherbeek.art.fe.constants.FrameConstants;
 import com.kampherbeek.art.fe.panels.CalcInputPanel;
 import com.kampherbeek.art.fe.panels.CalcResultPanel;
 import com.kampherbeek.art.util.TextProvider;
@@ -47,8 +48,8 @@ public class CalcController {
     private void constructFrame() {
         calcFrame = new JFrame(textProvider.getText("CALC.TITLE"));
         layoutComponents();
-        calcFrame.setSize(600,500);
-        calcFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        calcFrame.setSize(FrameConstants.DEFAULT_WIDTH.getSize(), FrameConstants.DEFAULT_HEIGHT.getSize());
+        calcFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         calcFrame.setVisible(true);
 
     }

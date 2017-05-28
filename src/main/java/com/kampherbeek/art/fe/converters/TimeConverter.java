@@ -29,14 +29,13 @@ public class TimeConverter {
 
     private TimeDto convertIt(String input) {
         TimeDto dto = new TimeDto();
+        final String separator = ":";
         // hh:mm:ss
         try {
-            String hourText = input.substring(0,2);
-            String minuteText = input.substring(3,5);
-            String secondText = input.substring(6);
-            dto.setHour(Integer.parseInt(hourText));
-            dto.setMinute(Integer.parseInt(minuteText));
-            dto.setSecond(Integer.parseInt(secondText));
+            String[] splitted = input.split(separator);
+            dto.setHour(Integer.parseInt(splitted[0]));
+            dto.setMinute(Integer.parseInt(splitted[1]));
+            dto.setSecond(Integer.parseInt(splitted[2]));
             dto.setValid(validator.validate(dto));
         } catch (NumberFormatException e) {
             dto.setValid(false);

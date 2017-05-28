@@ -28,7 +28,6 @@ public class CalcResultPanel extends JPanel {
         setLayout(new BorderLayout());
         add(panelTitleLabel, BorderLayout.NORTH);
         add(new JScrollPane(resultTextArea), BorderLayout.CENTER);
-
     }
 
     public void appendText(String text) {
@@ -40,88 +39,4 @@ public class CalcResultPanel extends JPanel {
         resultTextArea = new JTextArea();
     }
 
-
 }
-
-
-
-
-/*
-
-
-    private JTextArea textArea;
-
-    public TextPanel() {
-        textArea = new JTextArea();
-
-        setLayout(new BorderLayout());
-        add(new JScrollPane(textArea), BorderLayout.CENTER);
-    }
-
-    public void appendText(String text) {
-        textArea.append(text);
-    }
-
-
-
-
- */
-
-
-
-
-
-/*
-
-@Component
-public class CalcResultPanelCreator {
-
-    private JPanel resultPanel;
-    private JLabel panelTitleLabel;
-    private JLabel resultLabel;
-    private final TextProvider textProvider;
-
-
-    @Autowired
-    public CalcResultPanelCreator(@NonNull TextProvider textProvider) {
-        this.textProvider = textProvider;
-        defineComponents();
-    }
-
-    public JPanel constructPanel() {
-        resultPanel = new JPanel();
-        layoutComponents();
-        return resultPanel;
-    }
-
-
-
-    public void layoutComponents() {
-        resultPanel.setLayout(new GridBagLayout());
-
-        GridBagConstraints gc = new GridBagConstraints();
-        gc.gridy = 0;
-
-        gc.weightx = 1;
-        gc.weighty = 0.1;
-        gc.gridx = 0;
-
-        gc.fill = GridBagConstraints.NONE;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gc.insets = new Insets(0, 5, 0, 0);
-        resultPanel.add(panelTitleLabel, gc);
-
-        // next row
-        gc.gridy++;
-        gc.weightx = 1;
-        gc.weighty = 0.1;
-
-        gc.gridx = 0;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gc.insets = new Insets(0, 0, 0, 5);
-        resultPanel.add(resultLabel, gc);
-
-    }
-
-}
- */

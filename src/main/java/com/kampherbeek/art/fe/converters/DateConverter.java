@@ -23,21 +23,20 @@ public class DateConverter {
         this.validator = validator;
     }
 
-    public DateDto convertDate(String input, boolean gregorian) {
+    public DateDto convertDate(@NonNull final String input, boolean gregorian) {
         return convertIt(input, gregorian);
 
     }
 
-    private DateDto convertIt(final String input, boolean gregorian) {
+    private DateDto convertIt(@NonNull final String input, boolean gregorian) {
         DateDto dto = new DateDto();
+        final String separator = "-";
         // yyyy-mm-dd
         try {
-            String yearText = input.substring(0,4);
-            String monthText = input.substring(5,7);
-            String dayText = input.substring(8,10);
-            dto.setYear(Integer.parseInt(yearText));
-            dto.setMonth(Integer.parseInt(monthText));
-            dto.setDay(Integer.parseInt(dayText));
+            String[] splitted = input.split(separator);
+            dto.setYear(Integer.parseInt(splitted[0]));
+            dto.setMonth(Integer.parseInt(splitted[1]));
+            dto.setDay(Integer.parseInt(splitted[2]));
             dto.setGregorian(gregorian);
             dto.setValid(validator.validate(dto));
         } catch (NumberFormatException e) {

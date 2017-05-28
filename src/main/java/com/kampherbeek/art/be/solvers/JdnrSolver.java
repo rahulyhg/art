@@ -9,7 +9,6 @@ package com.kampherbeek.art.be.solvers;
 
 import com.kampherbeek.art.domain.dto.DateDto;
 import com.kampherbeek.art.domain.dto.TimeDto;
-import com.kampherbeek.art.domain.requests.JdnrRequest;
 import com.kampherbeek.art.util.TimeCalculations;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;

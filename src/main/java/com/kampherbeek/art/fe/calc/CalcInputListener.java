@@ -38,11 +38,11 @@ public class CalcInputListener {
     }
 
 
-    public void calcInputEventOccurred(CalcInputEvent event) {
-         handleEvent(event.getSource(), event);
-    };
+    public void calcInputEventOccurred(@NonNull CalcInputEvent event) {
+         handleEvent(event);
+    }
 
-    private void handleEvent(Object action, CalcInputEvent event) {
+    private void handleEvent(@NonNull CalcInputEvent event) {
         DateDto dateDto = dateConverter.convertDate(event.getDateText(), true);
         TimeDto timeDto = timeConverter.convertTime(event.getTimeText());
         if (!dateDto.isValid()) {
@@ -56,7 +56,6 @@ public class CalcInputListener {
             request.setDateDto(dateDto);
             request.setTimeDto(timeDto);
             JdnrResponse response = (JdnrResponse) jdnrEndpoint.handleRequest(request);
-            System.out.println("JDNR: " + response.getJdnr());
             CalcResultPanel resultPanel = event.getResultPanel();
             resultPanel.appendText(Double.toString(response.getJdnr()) + TextConstants.NEW_LINE.getText());
         }

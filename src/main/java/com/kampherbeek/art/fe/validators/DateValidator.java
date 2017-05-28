@@ -17,22 +17,19 @@ public class DateValidator implements Validator{
 
     @Override
     public boolean validate(@NonNull Object obj) {
-        if (obj instanceof DateDto) {
-            return checkIt((DateDto)obj);
-        }
-        return false;
+        return obj instanceof DateDto && checkIt((DateDto) obj);
     }
 
     private boolean checkIt(@NonNull DateDto dto) {
         return checkMinMax(dto) && checkExisting(dto);
     }
 
-    private boolean checkMinMax(DateDto dto) {
+    private boolean checkMinMax(@NonNull DateDto dto) {
         return dto.getYear() >= MinMaxValues.YEARS_MIN.getValueInt()
                 && dto.getYear() <= MinMaxValues.YEARS_MAX.getValueInt();
     }
 
-    private boolean checkExisting(DateDto dto) {
+    private boolean checkExisting(@NonNull DateDto dto) {
         double ut = 0.0;
         SweDate sweDate1 = new SweDate(dto.getYear(), dto.getMonth(), dto.getDay(), ut, dto.isGregorian());
         double jdnr = sweDate1.getJulDay();

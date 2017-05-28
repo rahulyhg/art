@@ -27,10 +27,7 @@ public class TimeValidator implements Validator {
      */
     @Override
     public boolean validate(@NonNull Object obj) {
-        if (obj instanceof TimeDto) {
-            return checkIt((TimeDto) obj);
-        }
-        return false;
+        return obj instanceof TimeDto && checkIt((TimeDto) obj);
     }
 
     private boolean checkIt(TimeDto dto) {

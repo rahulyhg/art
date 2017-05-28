@@ -40,7 +40,7 @@ public class DateConverterTest {
     @Test
     public void convertDateTime() throws Exception {
         DateDto result = converter.convertDate(input, gregorian);
-        assertEquals(19, result.getDay());
+        assertEquals(2017, result.getYear());
         assertEquals(5, result.getMonth());
         assertEquals(19, result.getDay());
         assertTrue(result.isGregorian());

@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 @Component
 public class TextProvider {
 
-    private ResourceBundle rb;
+    private final ResourceBundle rb;
 
     // TODO read locale from config
     public TextProvider() {

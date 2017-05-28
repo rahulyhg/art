@@ -11,11 +11,9 @@ import com.kampherbeek.art.be.endpoints.VersionEndpoint;
 import com.kampherbeek.art.domain.requests.GenericRequestNoPar;
 import com.kampherbeek.art.domain.requests.Request;
 import com.kampherbeek.art.domain.responses.VersionResponse;
+import com.kampherbeek.art.fe.constants.FrameConstants;
 import com.kampherbeek.art.fe.panels.MainInfoPanel;
 import com.kampherbeek.art.fe.panels.MainNavPanel;
-import com.kampherbeek.art.fe.panels.MainNavPanelCreator;
-import com.kampherbeek.art.fe.main.MainNavigationEvent;
-import com.kampherbeek.art.fe.main.MainNavigationListener;
 import com.kampherbeek.art.util.TextConstants;
 import com.kampherbeek.art.util.TextProvider;
 import lombok.Getter;
@@ -29,22 +27,15 @@ import java.awt.*;
 @Component
 public class MainController {
 
-    private JFrame mainFrame;
     private final MainInfoPanel infoPanel;
     @Getter
     private final MainNavPanel navPanel;
-
-
-//    private final MainInfoPanelCreator infoPanelCreator;
-//    private final MainNavPanelCreator navPanelCreator;
     @Getter
     private final CalcController calcController;
     @Getter
     private final ChartsController chartsController;
     private final VersionEndpoint versionEndpoint;
     private final TextProvider textProvider;
-
-    private final String KEY_TITLE = "GENERAL.TITLE";
 
     @Autowired
     public MainController(@NonNull MainInfoPanel infoPanel,
@@ -75,47 +66,20 @@ public class MainController {
         chartsController.show();
     }
 
-    // TODO retrieve text from backend
     private void constructFrame() {
-//        if (navPanel == null)  {
-//            navPanel = navPanelCreator.constructPanel(new MainNavigationListener(){
-//                public void navigationEventOccurred(MainNavigationEvent event) {
-//                    handleEvent(event.getNavigationAction());
-//
-//                }
-//            });
-//        }
-//        if (infoPanel == null) {
-//            infoPanel = infoPanelCreator.constructPanel();
-//        }
-        mainFrame = new JFrame(createTitle());
+        JFrame mainFrame = new JFrame(createTitle());
         mainFrame.setLayout(new BorderLayout());
         mainFrame.add(navPanel, BorderLayout.WEST);
         mainFrame.add(infoPanel, BorderLayout.CENTER);
-        mainFrame.setSize(600,500);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setSize(FrameConstants.DEFAULT_WIDTH.getSize(), FrameConstants.DEFAULT_HEIGHT.getSize());
+        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
     }
-
-
-//    private void handleEvent(String action) {
-//        System.out.println(action);
-//        if (action.equals("CALCULATORS")) {
-//            System.out.println("Match!");
-////            mainFrame.setVisible(false);
-//            calcController.show();
-//        }
-//        if (action.equals("HOROSCOPES")) {
-//            System.out.println("Match horoscopes!");
-////            mainFrame.setVisible(false);
-//            chartsController.show();
-//        }
-//    }
 
     private String createTitle() {
         Request request = new GenericRequestNoPar();
         VersionResponse response = (VersionResponse)versionEndpoint.handleRequest(request);
-        return textProvider.getText(KEY_TITLE)
+        return textProvider.getText("GENERAL.TITLE")
                 + TextConstants.SPACE.getText() + TextConstants.DIVISON.getText() + TextConstants.SPACE.getText()
                 + response.getVersion();
     }

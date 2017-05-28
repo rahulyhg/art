@@ -7,6 +7,7 @@
 package com.kampherbeek.art.fe.controllers;
 
 
+import com.kampherbeek.art.fe.constants.FrameConstants;
 import com.kampherbeek.art.util.TextProvider;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,6 @@ import java.awt.*;
 public class ChartsController {
 
     private JFrame frame;
-    private JPanel panel;
     private final TextProvider textProvider;
     private JMenuBar menuBar;
 
@@ -35,18 +35,19 @@ public class ChartsController {
     }
 
     private void constructFrame() {
-        frame = new JFrame("Charts");
-        frame.setSize(1000, 750);
-        frame.setMinimumSize(new Dimension(800, 600));
+        frame = new JFrame(textProvider.getText("CHARTS.TITLE_FRAME"));
+        frame.setSize(FrameConstants.DEFAULT_WIDTH.getSize(), FrameConstants.DEFAULT_HEIGHT.getSize());
+        frame.setMinimumSize(new Dimension(FrameConstants.DEFAULT_MINIMUM_WIDTH.getSize(),
+                FrameConstants.DEFAULT_MINIMUM_HEIGHT.getSize()));
 
     }
 
     private void constructMenu() {
         menuBar = new JMenuBar();
-        JMenu fileMenu = new JMenu("File");
-        JMenuItem newChartItem = new JMenuItem("New Chart");
-        JMenuItem openChartItem = new JMenuItem("Open Chart");
-        JMenuItem exitItem = new JMenuItem("Exit");
+        JMenu fileMenu = new JMenu(textProvider.getText("MENU.FILE"));
+        JMenuItem newChartItem = new JMenuItem(textProvider.getText("MENU.FILE.NEWCHART"));
+        JMenuItem openChartItem = new JMenuItem(textProvider.getText("MENU.FILE.OPENCHART"));
+        JMenuItem exitItem = new JMenuItem(textProvider.getText("MENU.FILE.EXIT"));
         fileMenu.add(newChartItem);
         fileMenu.add(openChartItem);
         fileMenu.addSeparator();
@@ -55,7 +56,6 @@ public class ChartsController {
     }
 
     private void layoutComponents() {
-        panel = new JPanel();
         frame.setJMenuBar(menuBar);
         frame.setVisible(true);
     }
