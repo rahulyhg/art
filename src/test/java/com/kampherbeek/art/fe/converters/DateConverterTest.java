@@ -24,6 +24,8 @@ public class DateConverterTest {
 
     private String input = "2017-05-19";
     private String invalidInput = "x017-05-19";
+    private String leadingZeroInput = "2000-01-01";
+    private String noLeadingZeroInput = "2000-2-3";
     private boolean gregorian = true;
 
 
@@ -38,7 +40,7 @@ public class DateConverterTest {
     }
 
     @Test
-    public void convertDateTime() throws Exception {
+    public void convertDate() throws Exception {
         DateDto result = converter.convertDate(input, gregorian);
         assertEquals(2017, result.getYear());
         assertEquals(5, result.getMonth());
@@ -48,10 +50,29 @@ public class DateConverterTest {
     }
 
     @Test
-    public void convertDateTimeInvalidInput() throws Exception {
+    public void convertDateInvalidInput() throws Exception {
         DateDto result = converter.convertDate(invalidInput, gregorian);
         assertFalse(result.isValid());
     }
 
+    @Test
+    public void convertDateLeadingZero() throws Exception {
+        DateDto result = converter.convertDate(leadingZeroInput, gregorian);
+        assertEquals(2000, result.getYear());
+        assertEquals(1, result.getMonth());
+        assertEquals(1, result.getDay());
+        assertTrue(result.isGregorian());
+        assertTrue(result.isValid());
+    }
+
+    @Test
+    public void convertDateNoLeadingZero() throws Exception {
+        DateDto result = converter.convertDate(noLeadingZeroInput, gregorian);
+        assertEquals(2000, result.getYear());
+        assertEquals(2, result.getMonth());
+        assertEquals(3, result.getDay());
+        assertTrue(result.isGregorian());
+        assertTrue(result.isValid());
+    }
 
 }

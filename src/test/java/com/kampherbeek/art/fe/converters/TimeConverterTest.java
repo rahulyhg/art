@@ -24,6 +24,8 @@ public class TimeConverterTest {
 
     private String input = "19:25:33";
     private String invalidInput = "x9:25:33";
+    private String leadingZeroInput = "01:03:08";
+    private String noLeadingZeroInput = "1:5:9";
 
     @Mock
     private TimeValidator validatorMock = mock(TimeValidator.class);
@@ -45,9 +47,27 @@ public class TimeConverterTest {
     }
 
     @Test
-    public void convertDateTimeInvalidInput() throws Exception {
+    public void convertTimeInvalidInput() throws Exception {
         TimeDto result = converter.convertTime(invalidInput);
         assertFalse(result.isValid());
+    }
+
+    @Test
+    public void convertTimeLeadingZero() throws Exception {
+        TimeDto result = converter.convertTime(leadingZeroInput);
+        assertEquals(1, result.getHour());
+        assertEquals(3, result.getMinute());
+        assertEquals(8, result.getSecond());
+        assertTrue(result.isValid());
+    }
+
+    @Test
+    public void convertTimeNoLeadingZero() throws Exception {
+        TimeDto result = converter.convertTime(noLeadingZeroInput);
+        assertEquals(1, result.getHour());
+        assertEquals(5, result.getMinute());
+        assertEquals(9, result.getSecond());
+        assertTrue(result.isValid());
     }
 
 
