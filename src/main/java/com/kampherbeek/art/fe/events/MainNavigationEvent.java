@@ -4,7 +4,7 @@
   Please check the file 'Copyright for ART' in the folder 'copyright' at the root of this distribution.
  */
 
-package com.kampherbeek.art.fe.main;
+package com.kampherbeek.art.fe.events;
 
 
 import com.kampherbeek.art.fe.panels.MainNavPanel;

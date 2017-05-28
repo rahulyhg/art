@@ -6,8 +6,8 @@
 
 package com.kampherbeek.art.fe.panels;
 
-import com.kampherbeek.art.fe.calc.CalcInputEvent;
-import com.kampherbeek.art.fe.calc.CalcInputListener;
+import com.kampherbeek.art.fe.events.CalcInputEvent;
+import com.kampherbeek.art.fe.listeners.CalcInputListener;
 import com.kampherbeek.art.fe.constants.GcConstants;
 import com.kampherbeek.art.fe.constants.PanelConstants;
 import com.kampherbeek.art.fe.controllers.CalcController;

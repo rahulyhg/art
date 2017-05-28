@@ -4,9 +4,10 @@
   Please check the file 'Copyright for ART' in the folder 'copyright' at the root of this distribution.
  */
 
-package com.kampherbeek.art.fe.main;
+package com.kampherbeek.art.fe.listeners;
 
 import com.kampherbeek.art.fe.controllers.MainController;
+import com.kampherbeek.art.fe.events.MainNavigationEvent;
 import com.kampherbeek.art.fe.panels.MainNavPanel;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;

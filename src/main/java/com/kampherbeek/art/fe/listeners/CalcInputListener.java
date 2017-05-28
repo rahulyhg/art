@@ -4,7 +4,7 @@
   Please check the file 'Copyright for ART' in the folder 'copyright' at the root of this distribution.
  */
 
-package com.kampherbeek.art.fe.calc;
+package com.kampherbeek.art.fe.listeners;
 
 
 import com.kampherbeek.art.be.endpoints.JdnrEndpoint;
@@ -14,6 +14,7 @@ import com.kampherbeek.art.domain.requests.JdnrRequest;
 import com.kampherbeek.art.domain.responses.JdnrResponse;
 import com.kampherbeek.art.fe.converters.DateConverter;
 import com.kampherbeek.art.fe.converters.TimeConverter;
+import com.kampherbeek.art.fe.events.CalcInputEvent;
 import com.kampherbeek.art.fe.panels.CalcResultPanel;
 import com.kampherbeek.art.util.TextConstants;
 import lombok.NonNull;
