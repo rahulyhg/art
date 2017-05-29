@@ -56,6 +56,7 @@ public class CalcInputListener {
             JdnrRequest request = new JdnrRequest();
             request.setDateDto(dateDto);
             request.setTimeDto(timeDto);
+
             JdnrResponse response = (JdnrResponse) jdnrEndpoint.handleRequest(request);
             jdnr = response.getJdnr();
         }

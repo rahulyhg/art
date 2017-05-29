@@ -12,6 +12,7 @@ import com.kampherbeek.art.domain.requests.GenericRequestNoPar;
 import com.kampherbeek.art.domain.requests.Request;
 import com.kampherbeek.art.domain.responses.VersionResponse;
 import com.kampherbeek.art.fe.constants.FrameConstants;
+import com.kampherbeek.art.fe.frames.MainFrame;
 import com.kampherbeek.art.fe.panels.MainInfoPanel;
 import com.kampherbeek.art.fe.panels.MainNavPanel;
 import com.kampherbeek.art.util.TextConstants;
@@ -27,35 +28,24 @@ import java.awt.*;
 @Component
 public class MainController {
 
-    private final MainInfoPanel infoPanel;
-    @Getter
-    private final MainNavPanel navPanel;
     @Getter
     private final CalcController calcController;
     @Getter
     private final ChartsController chartsController;
-    private final VersionEndpoint versionEndpoint;
-    private final TextProvider textProvider;
+    private final MainFrame mainFrame;
 
     @Autowired
-    public MainController(@NonNull MainInfoPanel infoPanel,
-                          @NonNull MainNavPanel navPanel,
-                          @NonNull CalcController calcController,
+    public MainController(@NonNull CalcController calcController,
                           @NonNull ChartsController chartsController,
-                          @NonNull VersionEndpoint versionEndpoint,
-                          @NonNull TextProvider textProvider) {
-        this.infoPanel = infoPanel;
-        this.navPanel = navPanel;
+                          @NonNull MainFrame mainFrame) {
         this.calcController = calcController;
         this.chartsController = chartsController;
-        this.versionEndpoint = versionEndpoint;
-        this.textProvider = textProvider;
-        this.navPanel.setController(this);
+        this.mainFrame = mainFrame;
+        mainFrame.setController(this);
     }
 
     public void show() {
-        constructFrame();
-
+        mainFrame.setVisible(true);
     }
 
     public void showCalc() {
@@ -64,25 +54,6 @@ public class MainController {
 
     public void showCharts() {
         chartsController.show();
-    }
-
-    private void constructFrame() {
-        JFrame mainFrame = new JFrame(createTitle());
-        mainFrame.setLayout(new BorderLayout());
-        mainFrame.add(navPanel, BorderLayout.WEST);
-        mainFrame.add(infoPanel, BorderLayout.CENTER);
-        mainFrame.setSize(FrameConstants.DEFAULT_WIDTH.getSize(), FrameConstants.DEFAULT_HEIGHT.getSize());
-        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        mainFrame.setVisible(true);
-    }
-
-    private String createTitle() {
-        Request request = new GenericRequestNoPar();
-        VersionResponse response = (VersionResponse)versionEndpoint.handleRequest(request);
-        final String key = "GENERAL.TITLE";
-        return textProvider.getText(key)
-                + TextConstants.SPACE.getText() + TextConstants.DIVISON.getText() + TextConstants.SPACE.getText()
-                + response.getVersion();
     }
 
 }

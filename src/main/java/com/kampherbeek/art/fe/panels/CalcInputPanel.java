@@ -30,7 +30,6 @@ public class CalcInputPanel extends JPanel {
     private final TextProvider textProvider;
     private final CalcInputListener listener;
     @Setter
-    @Getter
     private CalcController controller;
     private JButton calcButton;
     private JLabel dateLabel;

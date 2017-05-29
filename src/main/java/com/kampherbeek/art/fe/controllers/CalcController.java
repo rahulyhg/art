@@ -8,6 +8,7 @@ package com.kampherbeek.art.fe.controllers;
 
 
 import com.kampherbeek.art.fe.constants.FrameConstants;
+import com.kampherbeek.art.fe.frames.CalcFrame;
 import com.kampherbeek.art.fe.panels.CalcInputPanel;
 import com.kampherbeek.art.fe.panels.CalcResultPanel;
 import com.kampherbeek.art.util.TextProvider;
@@ -23,43 +24,22 @@ import java.awt.*;
 @Component
 public class CalcController {
 
-    private JFrame calcFrame;
-    private final TextProvider textProvider;
-    @Getter
-    private final CalcInputPanel inputPanel;
-    @Getter
-    private final CalcResultPanel resultPanel;
+    private final CalcFrame calcFrame;
 
     @Autowired
-    public CalcController(@NonNull CalcInputPanel inputPanel,
-                          @NonNull CalcResultPanel resultPanel,
+    public CalcController(@NonNull CalcFrame calcFrame,
                           @NonNull TextProvider textProvider) {
-        this.inputPanel = inputPanel;
-        this.resultPanel = resultPanel;
-        this.textProvider = textProvider;
-        this.inputPanel.setController(this);
+        this.calcFrame = calcFrame;
+        calcFrame.setController(this);
     }
 
     public void show() {
-        constructFrame();
-    }
-
-    public void addResult(@NonNull String result) {
-        resultPanel.appendText(result);
-    }
-
-    private void constructFrame() {
-        calcFrame = new JFrame(textProvider.getText("CALC.TITLE"));
-        layoutComponents();
-        calcFrame.setSize(FrameConstants.DEFAULT_WIDTH.getSize(), FrameConstants.DEFAULT_HEIGHT.getSize());
-        calcFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         calcFrame.setVisible(true);
     }
 
-    private void layoutComponents() {
-        calcFrame.setLayout(new BorderLayout());
-        calcFrame.add(inputPanel, BorderLayout.WEST);
-        calcFrame.add(resultPanel, BorderLayout.CENTER);
+    public void addResult(@NonNull String result) {
+        calcFrame.getResultPanel().appendText(result);
     }
+
 
 }
