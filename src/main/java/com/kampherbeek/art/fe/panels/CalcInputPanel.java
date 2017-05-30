@@ -6,13 +6,13 @@
 
 package com.kampherbeek.art.fe.panels;
 
+import com.kampherbeek.art.fe.buildingblocks.InfoLabel;
 import com.kampherbeek.art.fe.events.CalcInputEvent;
 import com.kampherbeek.art.fe.listeners.CalcInputListener;
 import com.kampherbeek.art.fe.constants.GcConstants;
 import com.kampherbeek.art.fe.constants.PanelConstants;
 import com.kampherbeek.art.fe.controllers.CalcController;
 import com.kampherbeek.art.util.TextProvider;
-import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +47,7 @@ public class CalcInputPanel extends JPanel {
     private JTextField timeField;
     private JTextField latitudeField;
     private JTextField longitudeField;
+    private GridBagConstraints gc;
 
     @Autowired
     public CalcInputPanel(@NonNull TextProvider textProvider,
@@ -61,20 +62,15 @@ public class CalcInputPanel extends JPanel {
 
 
     private void defineComponents() {
-        Color infoColor = new Color(57, 57, 200);
         dateLabel = new JLabel(textProvider.getText("GENERAL.LBL.DATE"));
-        dateInfoLabel = new JLabel(textProvider.getText("GENERAL.LBL.DATE.INFO"));
-        dateInfoLabel.setForeground(infoColor);
+        dateInfoLabel = new InfoLabel(textProvider.getText("GENERAL.LBL.DATE.INFO"));
         timeLabel = new JLabel(textProvider.getText("GENERAL.LBL.TIME"));
-        timeInfoLabel = new JLabel(textProvider.getText("GENERAL.LBL.TIME.INFO"));
-        timeInfoLabel.setForeground(infoColor);
+        timeInfoLabel = new InfoLabel(textProvider.getText("GENERAL.LBL.TIME.INFO"));
         calendarLabel = new JLabel(textProvider.getText("GENERAL.LBL.CALENDAR"));
         longitudeLabel = new JLabel(textProvider.getText("GENERAL.LBL.LONGITUDE"));
-        longitudeInfoLabel = new JLabel(textProvider.getText("GENERAL.LBL.LONGITUDE.INFO"));
-        longitudeInfoLabel.setForeground(infoColor);
+        longitudeInfoLabel = new InfoLabel(textProvider.getText("GENERAL.LBL.LONGITUDE.INFO"));
         latitudeLabel = new JLabel(textProvider.getText("GENERAL.LBL.LATITUDE"));
-        latitudeInfoLabel = new JLabel(textProvider.getText("GENERAL.LBL.LATITUDE.INFO"));
-        latitudeInfoLabel.setForeground(infoColor);
+        latitudeInfoLabel = new InfoLabel(textProvider.getText("GENERAL.LBL.LATITUDE.INFO"));
         dateField = new JTextField(10);
         timeField = new JTextField(10);
         latitudeField = new JTextField(10);
@@ -85,7 +81,7 @@ public class CalcInputPanel extends JPanel {
         ButtonGroup calendarGroup = new ButtonGroup();
         calendarGroup.add(julianRadio);
         calendarGroup.add(gregorianRadio);
-        calcButton = new JButton(textProvider.getText("CALC.BTN.CALC"));
+        calcButton = new JButton(textProvider.getText("CALC.BTN.JDNR"));
     }
 
     private void defineActions() {
@@ -109,7 +105,6 @@ public class CalcInputPanel extends JPanel {
         };
     }
 
-
     private void defineBorders() {
         String key = "CALC.TITLE.INPUTPANEL";
         Border innerBorder = BorderFactory.createTitledBorder(textProvider.getText(key));
@@ -118,142 +113,56 @@ public class CalcInputPanel extends JPanel {
         setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
     }
 
-
-
     private void layoutComponents() {
         setLayout(new GridBagLayout());
-        GridBagConstraints gc = new GridBagConstraints();
-        gc.gridy = 0;
+        gc = new GridBagConstraints();
         gc.weightx = GcConstants.M.getValue();
 
+        Insets standardInsets = new Insets(0, 5, 0, 5);
+        int yAxis = 0;
+        int fillNone = GridBagConstraints.NONE;
+        int anchorLE = GridBagConstraints.LINE_END;
+        int anchorLS = GridBagConstraints.LINE_START;
+        double weightS = GcConstants.S.getValue();
+        double weightXS = GcConstants.XS.getValue();
+        double weightM = GcConstants.M.getValue();
+
         // date
-        gc.gridx = 0;
-        gc.weighty = GcConstants.S.getValue();
-        gc.fill = GridBagConstraints.NONE;
-        gc.anchor = GridBagConstraints.LINE_END;
-        gc.insets = new Insets(0, 0, 0, 5);
-        add(dateLabel, gc);
-
-        gc.gridx = 1;
-        gc.insets = new Insets(0, 0, 0, 0);
-        gc.anchor = GridBagConstraints.LINE_START;
-        add(dateField, gc);
-
-        // date info
-        gc.gridx = 0;
-        gc.gridy++;
-        gc.gridwidth = 2;
-        gc.weighty = GcConstants.XS.getValue();
-        gc.fill = GridBagConstraints.NONE;
-        gc.anchor = GridBagConstraints.LINE_END;
-        gc.insets = new Insets(0, 0, 0, 5);
-        add(dateInfoLabel, gc);
-
+        addToGc(0, yAxis, 1, weightS, fillNone, anchorLE, standardInsets, dateLabel);
+        addToGc(1, yAxis, 1, weightS, fillNone, anchorLE, standardInsets, dateField);
+        addToGc(0, ++yAxis, 2, weightXS, fillNone, anchorLE, standardInsets, dateInfoLabel);
         // time
-        gc.gridx = 0;
-        gc.gridy++;
-        gc.gridwidth = 1;
-        gc.weighty = GcConstants.S.getValue();
-        gc.fill = GridBagConstraints.NONE;
-        gc.anchor = GridBagConstraints.LINE_END;
-        gc.insets = new Insets(0, 0, 0, 5);
-        add(timeLabel, gc);
-
-        gc.gridx = 1;
-        gc.insets = new Insets(0, 0, 0, 0);
-        gc.anchor = GridBagConstraints.LINE_START;
-        add(timeField, gc);
-
-        // time info
-        gc.gridx = 0;
-        gc.gridy++;
-        gc.gridwidth = 2;
-        gc.weighty = GcConstants.XS.getValue();
-        gc.fill = GridBagConstraints.NONE;
-        gc.anchor = GridBagConstraints.LINE_END;
-        gc.insets = new Insets(0, 0, 0, 5);
-        add(timeInfoLabel, gc);
-
+        addToGc(0, ++yAxis, 1, weightS, fillNone, anchorLE, standardInsets, timeLabel);
+        addToGc(1, yAxis, 1, weightS, fillNone, anchorLE, standardInsets, timeField);
+        addToGc(0, ++yAxis, 2, weightXS, fillNone, anchorLE, standardInsets, timeInfoLabel);
         // calendar
-        gc.gridx = 0;
-        gc.gridy++;
-        gc.gridwidth = 1;
-        gc.weighty = GcConstants.XS.getValue();
-        gc.fill = GridBagConstraints.NONE;
-        gc.anchor = GridBagConstraints.LINE_END;
-        gc.insets = new Insets(0, 0, 0, 5);
-        add(calendarLabel, gc);
-
-        gc.gridx = 1;
-        gc.insets = new Insets(0, 0, 0, 0);
-        gc.anchor = GridBagConstraints.LINE_START;
-        add(gregorianRadio, gc);
-
-        // calendar 2nd line
-        gc.gridy++;
-        gc.weighty = GcConstants.XS.getValue();
-        gc.gridx = 1;
-        gc.insets = new Insets(0, 0, 0, 0);
-        gc.anchor = GridBagConstraints.LINE_START;
-        add(julianRadio, gc);
-
+        addToGc(0, ++yAxis, 1, weightXS, fillNone, anchorLE, standardInsets, calendarLabel);
+        addToGc(1, yAxis, 1, weightXS, fillNone, anchorLS, standardInsets, gregorianRadio);
+        addToGc(1, ++yAxis, 1, weightXS, fillNone, anchorLS, standardInsets, julianRadio);
         // latitude
-        gc.gridx = 0;
-        gc.gridy++;
-        gc.weighty = GcConstants.S.getValue();
-        gc.fill = GridBagConstraints.NONE;
-        gc.anchor = GridBagConstraints.LINE_END;
-        gc.insets = new Insets(0, 0, 0, 5);
-        add(latitudeLabel, gc);
-
-        gc.gridx = 1;
-        gc.insets = new Insets(0, 0, 0, 0);
-        gc.anchor = GridBagConstraints.LINE_START;
-        add(latitudeField, gc);
-
-        // latitude info
-        gc.gridx = 0;
-        gc.gridy++;
-        gc.gridwidth = 2;
-        gc.weighty = GcConstants.XS.getValue();
-        gc.fill = GridBagConstraints.NONE;
-        gc.anchor = GridBagConstraints.LINE_END;
-        gc.insets = new Insets(0, 0, 0, 5);
-        add(latitudeInfoLabel, gc);
-
+        addToGc(0, ++yAxis, 1, weightS, fillNone, anchorLE, standardInsets, latitudeLabel);
+        addToGc(1, yAxis, 1, weightS, fillNone, anchorLE, standardInsets, latitudeField);
+        addToGc(0, ++yAxis, 2, weightXS, fillNone, anchorLE, standardInsets, latitudeInfoLabel);
         // longitude
-        gc.gridx = 0;
-        gc.gridy++;
-        gc.gridwidth = 1;
-        gc.weighty = GcConstants.S.getValue();
-        gc.fill = GridBagConstraints.NONE;
-        gc.anchor = GridBagConstraints.LINE_END;
-        gc.insets = new Insets(0, 0, 0, 5);
-        add(longitudeLabel, gc);
+        addToGc(0, ++yAxis, 1, weightS, fillNone, anchorLS, standardInsets, longitudeLabel);
+        addToGc(1, yAxis, 1, weightS, fillNone, anchorLE, standardInsets, longitudeField);
+        addToGc(0, ++yAxis, 2, weightXS, fillNone, anchorLE, standardInsets, longitudeInfoLabel);
+        // button
+        addToGc(0, ++yAxis, 1, weightM, fillNone, anchorLE, standardInsets, calcButton);
+    }
 
-        gc.gridx = 1;
-        gc.insets = new Insets(0, 0, 0, 0);
-        gc.anchor = GridBagConstraints.LINE_START;
-        add(longitudeField, gc);
 
-        // longitude info
-        gc.gridx = 0;
-        gc.gridy++;
-        gc.gridwidth = 2;
-        gc.weighty = GcConstants.XS.getValue();
-        gc.fill = GridBagConstraints.NONE;
-        gc.anchor = GridBagConstraints.LINE_END;
-        gc.insets = new Insets(0, 0, 0, 5);
-        add(longitudeInfoLabel, gc);
-
-        // add button
-
-        gc.gridy++;
-        gc.gridwidth = 1;
-        gc.weighty = GcConstants.M.getValue();
-        gc.anchor = GridBagConstraints.LINE_END;
-        gc.insets = new Insets(0, 5, 0, 5);
-        add(calcButton, gc);
+    private void addToGc(int x, int y, int gridwidth, double weightY,
+                         @NonNull int fill, @NonNull int anchor,
+                         @NonNull Insets insets, @NonNull JComponent component) {
+        gc.gridx = x;
+        gc.gridy = y;
+        gc.gridwidth = gridwidth;
+        gc.weighty = weightY;
+        gc.fill = fill;
+        gc.anchor = anchor;
+        gc.insets = insets;
+        add(component, gc);
     }
 
 
