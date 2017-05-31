@@ -7,7 +7,6 @@
 package com.kampherbeek.art.fe.events;
 
 import com.kampherbeek.art.fe.controllers.CalcController;
-import com.kampherbeek.art.fe.panels.CalcResultPanel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;

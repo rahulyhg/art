@@ -14,7 +14,6 @@ import com.kampherbeek.art.fe.panels.CalcResultPanel;
 import com.kampherbeek.art.util.TextProvider;
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +28,6 @@ public class CalcFrame extends JFrame {
     private final CalcInputPanel inputPanel;
     @Getter @NonNull
     private final CalcResultPanel resultPanel;
-    private CalcController controller;
 
     @Autowired
     public CalcFrame(@NonNull TextProvider textProvider,
@@ -42,7 +40,6 @@ public class CalcFrame extends JFrame {
     }
 
     public void setController(@NonNull CalcController controller) {
-        this.controller = controller;
         inputPanel.setController(controller);
     }
 

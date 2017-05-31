@@ -18,7 +18,6 @@ import com.kampherbeek.art.util.TextConstants;
 import com.kampherbeek.art.util.TextProvider;
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
@@ -32,7 +31,6 @@ public class MainFrame extends JFrame {
     private final MainNavPanel navPanel;
     private final VersionEndpoint versionEndpoint;
     private final TextProvider textProvider;
-    private MainController controller;
 
     public MainFrame(@NonNull MainInfoPanel infoPanel,
                      @NonNull MainNavPanel navPanel,
@@ -56,7 +54,6 @@ public class MainFrame extends JFrame {
     }
 
     public void setController(@NonNull MainController controller) {
-        this.controller = controller;
         navPanel.setController(controller);
     }
 

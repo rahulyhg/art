@@ -6,18 +6,25 @@
 
 package com.kampherbeek.art.util;
 
+import com.kampherbeek.art.config.Settings;
 import org.junit.Before;
 import org.junit.Test;
+import static org.mockito.Mockito.*;
 
 import static org.junit.Assert.*;
 
 public class TextProviderTest {
 
     private TextProvider textProvider;
+    private Settings settingsMock = mock(Settings.class);
+    private final String COUNTRY="US";
+    private final String LANG="en";
 
     @Before
     public void setUp() throws Exception {
-        textProvider = new TextProvider();
+        when(settingsMock.getLocaleCountry()).thenReturn(COUNTRY);
+        when(settingsMock.getLocaleLang()).thenReturn(LANG);
+        textProvider = new TextProvider(settingsMock);
     }
 
     @Test

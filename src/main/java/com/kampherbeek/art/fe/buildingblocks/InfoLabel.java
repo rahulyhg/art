@@ -16,19 +16,20 @@ import java.awt.*;
  */
 public class InfoLabel extends JLabel {
 
-    public InfoLabel() {
-        super();
-        constructLookAndFeel();
-    }
-
     public InfoLabel(@NonNull String text) {
         super(text);
         constructLookAndFeel();
     }
 
     private void constructLookAndFeel() {
-        Color infoColor = new Color(57, 57, 200);    // TODO move color to set of constants
-        this.setForeground(infoColor);
+        this.setForeground(createColor());
     }
 
+    @SuppressWarnings("MagicNumber")
+    private Color createColor() {
+        int red = 57;
+        int green = 57;
+        int blue = 200;
+        return new Color(red, green, blue);
+    }
 }

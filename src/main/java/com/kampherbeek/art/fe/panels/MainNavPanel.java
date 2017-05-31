@@ -92,15 +92,15 @@ public class MainNavPanel extends JPanel {
 
 
     private void defineActions() {
-        chartsBtn.addActionListener(createActionListener("HOROSCOPES", this));
-        cyclesBtn.addActionListener(createActionListener("CYCLES", this));
-        statisticsBtn.addActionListener(createActionListener("STATISTICS", this));
-        calculatorsBtn.addActionListener(createActionListener("CALCULATORS", this));
-        exitBtn.addActionListener(createActionListener("EXIT", this));
+        chartsBtn.addActionListener(createActionListener("HOROSCOPES"));
+        cyclesBtn.addActionListener(createActionListener("CYCLES"));
+        statisticsBtn.addActionListener(createActionListener("STATISTICS"));
+        calculatorsBtn.addActionListener(createActionListener("CALCULATORS"));
+        exitBtn.addActionListener(createActionListener("EXIT"));
 
     }
 
-    private ActionListener createActionListener(@NonNull final String btnType, @NonNull MainNavPanel navPanel) {
+    private ActionListener createActionListener(@NonNull final String btnType) {
         return new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 MainNavigationEvent event = new MainNavigationEvent(this, btnType, controller);

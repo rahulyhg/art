@@ -17,7 +17,6 @@ import com.kampherbeek.art.fe.converters.DateConverter;
 import com.kampherbeek.art.fe.converters.TimeConverter;
 import com.kampherbeek.art.fe.events.CalcInputEvent;
 import com.kampherbeek.art.fe.helpers.CalcResultHelper;
-import com.kampherbeek.art.fe.panels.CalcResultPanel;
 import com.kampherbeek.art.util.TextConstants;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;

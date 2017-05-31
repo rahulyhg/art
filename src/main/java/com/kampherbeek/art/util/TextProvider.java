@@ -7,7 +7,9 @@
 package com.kampherbeek.art.util;
 
 
+import com.kampherbeek.art.config.Settings;
 import lombok.NonNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Locale;
@@ -18,20 +20,26 @@ import java.util.ResourceBundle;
 public class TextProvider {
 
     private final ResourceBundle rb;
+    private final Settings settings;
+    private final String bundle = "art_common";
 
-    // TODO read locale from config
-    public TextProvider() {
-        Locale.setDefault(new Locale("en", "US"));
-        rb = ResourceBundle.getBundle("art_common");
+    @Autowired
+    public TextProvider(@NonNull Settings settings) {
+        this.settings = settings;
+        Locale.setDefault(createLocale());
+        rb = ResourceBundle.getBundle(bundle);
     }
 
     public String getText(@NonNull String key) {
-        String EMPTY_STRING = "";
         try {
             return rb.getString(key);
         } catch(MissingResourceException mre) {
-            return EMPTY_STRING;
+            return TextConstants.EMPTY_STRING.getText();
         }
+    }
+
+    private Locale createLocale() {
+        return new Locale(settings.getLocaleLang(), settings.getLocaleCountry());
     }
 
 

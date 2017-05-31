@@ -26,6 +26,7 @@ public class TimeConverterTest {
     private String invalidInput = "x9:25:33";
     private String leadingZeroInput = "01:03:08";
     private String noLeadingZeroInput = "1:5:9";
+    private String noSecondsInput = "12:10";
 
     @Mock
     private TimeValidator validatorMock = mock(TimeValidator.class);
@@ -70,6 +71,14 @@ public class TimeConverterTest {
         assertTrue(result.isValid());
     }
 
+    @Test
+    public void convertTimeNoSeconds() throws Exception {
+        TimeDto result = converter.convertTime(noSecondsInput);
+        assertEquals(12, result.getHour());
+        assertEquals(10, result.getMinute());
+        assertEquals(0, result.getSecond());
+        assertTrue(result.isValid());
+    }
 
 }
 

@@ -8,7 +8,6 @@ package com.kampherbeek.art.fe.listeners;
 
 import com.kampherbeek.art.fe.controllers.MainController;
 import com.kampherbeek.art.fe.events.MainNavigationEvent;
-import com.kampherbeek.art.fe.panels.MainNavPanel;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
 

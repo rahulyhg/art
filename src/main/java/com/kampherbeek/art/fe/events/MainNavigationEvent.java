@@ -8,7 +8,6 @@ package com.kampherbeek.art.fe.events;
 
 
 import com.kampherbeek.art.fe.controllers.MainController;
-import com.kampherbeek.art.fe.panels.MainNavPanel;
 import lombok.Getter;
 import lombok.NonNull;
 

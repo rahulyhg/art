@@ -7,18 +7,11 @@
 package com.kampherbeek.art.fe.controllers;
 
 
-import com.kampherbeek.art.fe.constants.FrameConstants;
 import com.kampherbeek.art.fe.frames.CalcFrame;
-import com.kampherbeek.art.fe.panels.CalcInputPanel;
-import com.kampherbeek.art.fe.panels.CalcResultPanel;
 import com.kampherbeek.art.util.TextProvider;
-import lombok.Getter;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.swing.*;
-import java.awt.*;
 
 
 @Component
