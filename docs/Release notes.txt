@@ -1,0 +1,9 @@
+ART Release notes
+
+0.1.0   –  2017-06-02  – internal release
+Initial version
+* Swing frontend is in place.
+* Calculator for Julian Day Number, supporting input of date in Julian or Gregorian Calendar (astronomical years) and input of time in UT.
+* Validation/error handling of input.
+* Supports multiple languages (english and dutch), based on a resource bundle and a properties file for the Locale.
+* Shows the actual version in the title bar.

@@ -12,16 +12,18 @@ import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import lombok.Getter;
-
 @Component
 public class VersionSolver {
 
-	@Getter
-	private String version;
+    private final Settings settings;
 
 	@Autowired
 	public VersionSolver(@NonNull Settings settings) {
-		this.version = settings.getVersion();
+	    this.settings = settings;
 	}
+
+    public String getVersion() {
+	    return settings.getVersion();
+    }
+
 }
